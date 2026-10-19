@@ -145,3 +145,7 @@ of cursor position, buffer text, registers, search, marks, undo, and viewport.
 Code: `lua/motion-ruler/model.lua` calculates labels,
 `lua/motion-ruler/render.lua` lays out the ruler, and `lua/motion-ruler/init.lua`
 handles setup, commands, and editor events.
+
+## License
+
+[MIT](LICENSE). Copyright (c) 2026 JinBa1.
