@@ -1,0 +1,65 @@
+*motion-ruler.txt*     Horizontal relative-motion ruler for Neovim
+
+==============================================================================
+SETUP                                                    *motion-ruler-setup*
+
+Requires Neovim 0.10+. Add the plugin directory to 'runtimepath', then: >lua
+
+    require("motion-ruler").setup({
+      enabled = true,
+      word_mode = "word",       -- w/b; use "WORD" for W/B
+      max_count = 99,
+      fill_char = "─",          -- or " "
+      max_line_length = 10000,
+      disabled_filetypes = {},
+    })
+<
+Outside the current word, labels count |w| and |b| movements. Inside that word,
+labels count |h| and |l| movements. Zero marks your cursor. The first |b| from
+inside a word reaches its start, and consumes one step in backward word counts.
+The plugin follows 'iskeyword' and Neovim's Unicode character classes.
+
+The ruler always uses one row. Multi-digit labels read horizontally, with the
+first digit beneath the target. If labels overlap or merge, nearer targets take
+priority and some farther labels are omitted. Zero always takes priority.
+Use max_count = 9 to show only single-digit distances.
+
+==============================================================================
+COMMANDS                                              *motion-ruler-commands*
+
+:MotionRulerToggle                                      *:MotionRulerToggle*
+    Toggle the ruler. Lua: require("motion-ruler").toggle()
+
+:MotionRulerEnable                                      *:MotionRulerEnable*
+    Enable the ruler. Lua: require("motion-ruler").enable()
+
+:MotionRulerDisable                                    *:MotionRulerDisable*
+    Disable the ruler. Lua: require("motion-ruler").disable()
+
+require("motion-ruler").refresh() recalculates the current ruler immediately.
+setup() registers all commands and automatic updates. No default keys are mapped.
+
+==============================================================================
+HIGHLIGHTS                                          *motion-ruler-highlights*
+
+MotionRulerLine         Links to NonText.
+MotionRulerWord         Links to Special.
+MotionRulerCharacter    Links to Comment.
+MotionRulerCursor       Links to CursorLineNr.
+
+==============================================================================
+DISPLAY                                                 *motion-ruler-display*
+
+Shows in Normal, Visual, and operator-pending modes. Hidden in Insert/command-line
+modes, special buffers, floats, closed folds, and oversized lines. Wrapped lines,
+'conceallevel' > 0, 'rightleft', and virtual cursor space hide the ruler because
+their display columns cannot be mapped by a plain virtual line.
+
+With 'nowrap', labels follow horizontal scrolling. The ruler is a buffer
+decoration shared by splits of that buffer; alignment refers to the active
+window. Inline virtual text from other plugins can shift source columns.
+
+Counts describe built-in navigation, not custom mappings or special operator
+rules such as |cw|.
+
+vim:tw=78:ts=8:ft=help:norl:

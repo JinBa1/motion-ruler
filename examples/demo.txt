@@ -1,0 +1,19 @@
+alpha bravo charlie delta echo
+
+The cursor starts on the r in charlie. Its ruler reads:
+3     2     3210123 1     2
+
+Try 2w to reach echo, 2b to reach bravo, or 3h to reach c.
+Use Space r to toggle the ruler. It hides while you insert text.
+
+Punctuation is a separate Vim word: object.method(arg, other)
+Tabs:	one	two	three
+Unicode: café naïve 中文 日本語 αβγ 🙂🙂
+Combining accents: ábcd éfgh
+Long words show full counts on one row: abcdefghijklmnopqrstuvwxyz
+Many words: a b c d e f g h i j k l m n o p q r s t
+
+Word labels show the number of w or b motions to each word start.
+Inside your current word, labels show h/l distances instead.
+Read multi-digit counts horizontally; their first digit marks the target.
+When counts would overlap, nearer targets take priority.
